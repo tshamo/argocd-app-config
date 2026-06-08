@@ -1,7 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hello-world
+  name: hello-world-argo-application
+  namespace: argocd
 spec:
   project: default
 
@@ -9,12 +10,13 @@ spec:
     repoURL: https://github.com/tshamo/argocd-app-config.git
     targetRevision: HEAD
     path: dev
-  destination: 
+  destination:
     server: https://kubernetes.default.svc
+    namespace: hello-world
 
-  #syncPolicy:
-  #  syncOptions:
-  #  - CreateNamespace=true
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
 
     automated:
       selfHeal: true
