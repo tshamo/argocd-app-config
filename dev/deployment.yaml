@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: hello-world
 spec:
   selector:
     matchLabels:
-      app: myapp
+      app: hello-world
   replicas: 5
   template:
     metadata:
       labels:
-        app: myapp
+        app: hello-world
     spec:
       containers:
-      - name: myapp
+      - name: hello-world
         image: taulant101/hello-app:3.0
         ports:
         - containerPort: 8080
