@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: hello-world
-  replicas: 5
+  replicas: 3
   template:
     metadata:
       labels:
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: taulant101/hello-app:3.0
+        image: taulant101/hello-app:4.0
         ports:
         - containerPort: 80
