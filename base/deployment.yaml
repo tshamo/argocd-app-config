@@ -16,3 +16,6 @@ spec:
         image: taulant101/hello-app:4.0
         ports:
         - containerPort: 80
+        env:
+          - name: APP_ENV
+            value: base

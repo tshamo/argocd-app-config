@@ -15,3 +15,10 @@ patches:
     - op: replace
       path: /spec/rules/0/host
       value: hello-world.local
+- target:
+    kind: Deployment
+    name: hello-world
+  patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/env/0/value
+      value: prod
