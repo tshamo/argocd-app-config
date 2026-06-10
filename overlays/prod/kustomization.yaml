@@ -1,0 +1,17 @@
+resources:
+- ../../base
+
+namespace: hello-world-prod
+
+replicas:
+- name: hello-world
+  count: 3
+
+patches:
+- target:
+    kind: Ingress
+    name: hello-world-ingress
+  patch: |-
+    - op: replace
+      path: /spec/rules/0/host
+      value: hello-world.local

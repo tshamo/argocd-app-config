@@ -1,0 +1,17 @@
+resources:
+- ../../base
+
+namespace: hello-world-staging
+
+replicas:
+- name: hello-world
+  count: 2
+
+patches:
+- target:
+    kind: Ingress
+    name: hello-world-ingress
+  patch: |-
+    - op: replace
+      path: /spec/rules/0/host
+      value: staging.hello-world.local
