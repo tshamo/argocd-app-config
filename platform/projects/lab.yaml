@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: lab
+  namespace: argocd
+spec:
+  description: Local lab project with production-style boundaries
+  sourceRepos:
+  - https://github.com/tshamo/argocd-app-config.git
+  destinations:
+  - name: dev
+    namespace: hello-world
+  - name: staging
+    namespace: hello-world
+  - name: prod
+    namespace: hello-world
+  clusterResourceWhitelist:
+  - group: ""
+    kind: Namespace
+  namespaceResourceWhitelist:
+  - group: "*"
+    kind: "*"

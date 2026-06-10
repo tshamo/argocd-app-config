@@ -1,11 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
 resources:
 - ../../base
 
-namespace: hello-world-dev
+namespace: hello-world
 
 replicas:
 - name: hello-world
-  count: 1
+  count: 3
 
 patches:
 - target:
@@ -14,7 +17,7 @@ patches:
   patch: |-
     - op: replace
       path: /spec/rules/0/host
-      value: dev.hello-world.local
+      value: hello-world.local
 
 - target:
     kind: Deployment
@@ -22,4 +25,4 @@ patches:
   patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/env/0/value
-      value: dev
+      value: prod

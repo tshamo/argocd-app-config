@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: hello-world
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions:
+  - missingkey=error
+  generators:
+  - git:
+      repoURL: https://github.com/tshamo/argocd-app-config.git
+      revision: HEAD
+      files:
+      - path: clusters/*/config.yaml
+  template:
+    metadata:
+      name: 'hello-world-{{.environment}}'
+      labels:
+        app.kubernetes.io/name: hello-world
+        lab.environment: '{{.environment}}'
+        lab.tier: '{{.tier}}'
+    spec:
+      project: lab
+      source:
+        repoURL: https://github.com/tshamo/argocd-app-config.git
+        targetRevision: HEAD
+        path: 'apps/hello-world/overlays/{{.environment}}'
+      destination:
+        name: '{{.cluster.name}}'
+        namespace: '{{.namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true

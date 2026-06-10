@@ -1,0 +1,7 @@
+environment: staging
+tier: nonprod
+namespace: hello-world
+cluster:
+  name: staging
+  context: kind-staging
+  provider: kind

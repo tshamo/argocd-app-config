@@ -1,0 +1,7 @@
+environment: dev
+tier: nonprod
+namespace: hello-world
+cluster:
+  name: dev
+  context: kind-dev
+  provider: kind
