@@ -15,6 +15,7 @@ patches:
     - op: replace
       path: /spec/rules/0/host
       value: hello-world.local
+
 - target:
     kind: Deployment
     name: hello-world
