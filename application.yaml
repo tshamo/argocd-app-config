@@ -12,7 +12,7 @@ spec:
     path: dev
   destination:
     server: https://kubernetes.default.svc
-    namespace: hello-world
+    namespace: default
 
   syncPolicy:
     syncOptions:
