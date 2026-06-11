@@ -1,0 +1,40 @@
+name: Validate GitOps
+
+on:
+  pull_request:
+  push:
+    branches:
+    - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v4
+      with:
+        version: latest
+
+    - name: Render app overlays
+      run: |
+        kubectl kustomize apps/hello-world/overlays/dev > /tmp/hello-world-dev.yaml
+        kubectl kustomize apps/hello-world/overlays/staging > /tmp/hello-world-staging.yaml
+        kubectl kustomize apps/hello-world/overlays/prod > /tmp/hello-world-prod.yaml
+
+    - name: Render Argo CD platform manifests
+      run: |
+        kubectl kustomize platform/projects > /tmp/projects.yaml
+        kubectl kustomize platform/applicationsets > /tmp/applicationsets.yaml
+
+    - name: Check expected namespaces
+      run: |
+        grep -q "namespace: hello-world" /tmp/hello-world-dev.yaml
+        grep -q "namespace: hello-world" /tmp/hello-world-staging.yaml
+        grep -q "namespace: hello-world" /tmp/hello-world-prod.yaml
+
+    - name: Check prod replica count
+      run: |
+        grep -q "replicas: 3" /tmp/hello-world-prod.yaml
