@@ -37,4 +37,4 @@ jobs:
 
     - name: Check prod replica count
       run: |
-        grep -q "replicas: 3" /tmp/hello-world-prod.yaml
+        grep -q "replicas: 5" /tmp/hello-world-prod.yaml
