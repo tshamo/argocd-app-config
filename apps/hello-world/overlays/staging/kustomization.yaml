@@ -6,6 +6,10 @@ resources:
 
 namespace: hello-world
 
+images:
+- name: taulant101/hello-app
+  newTag: "4.0"
+
 replicas:
 - name: hello-world
   count: 1
