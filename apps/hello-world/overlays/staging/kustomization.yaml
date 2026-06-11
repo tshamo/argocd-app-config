@@ -12,7 +12,7 @@ images:
 
 replicas:
 - name: hello-world
-  count: 1
+  count: 2
 
 patches:
 - target:
