@@ -25,7 +25,7 @@ spec:
       source:
         repoURL: https://github.com/tshamo/argocd-app-config.git
         targetRevision: HEAD
-        path: 'apps/hello-world/overlays/{{.environment}}'
+        targetRevision: '{{ if eq .environment "prod" }}production{{ else }}main{{ end }}'
       destination:
         name: '{{.cluster.name}}'
         namespace: '{{.namespace}}'
