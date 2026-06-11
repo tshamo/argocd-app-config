@@ -8,7 +8,7 @@ namespace: hello-world
 
 replicas:
 - name: hello-world
-  count: 3
+  count: 5
 
 patches:
 - target:
